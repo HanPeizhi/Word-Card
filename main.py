@@ -10,6 +10,7 @@ if __name__ == '__main__':
     in_str = input('Enter: ')
     spl_str = in_str.split()
     nl = WordList(spl_str[0])
+
     nl.add_word(spl_str[1], spl_str[2], spl_str[3], spl_str[4])
     nl.print_list()
 
