@@ -7,14 +7,27 @@ from WordsCard.WordList import WordList
 
 # 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-    in_str = input('Enter: ')
-    spl_str = in_str.split()
-    nl = WordList(spl_str[0])
+    wln = input("Input the Word List number: ")
+    nl = WordList(wln)
 
-    nl.add_word(spl_str[1], spl_str[2], spl_str[3], spl_str[4])
-    nl.print_list()
+    for i in range(4):
+        in_str = input('Enter a word: ')
+        spl_str = in_str.split()
 
-    file_name = input()
-    nl.save_list(file_name)
+        nl.add_word(spl_str[0], spl_str[1], spl_str[2], spl_str[3])
+        nl.print_list()
 
-    #Input: 1 1 emperor n.皇帝;君主 0
+    flag  = 1
+    while int(flag):
+        nl.review_word()
+        flag = input("Flag: ")
+
+
+    # file_name = input()
+    # nl.save_list(file_name)
+
+    #Input:
+    #1 emperor n.皇帝;君主 0
+    #1 exact a.精确的，准确的 1
+    #1 traditional a.传统的，惯例的；口传的，传说的 1
+    #1 lack n./vt.缺乏，不足，没有 1
