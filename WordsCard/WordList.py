@@ -79,8 +79,26 @@ class WordList:
         dt = pd.DataFrame(tb, columns=col_name)
         dt.to_excel(file_name, index=0)
 
-    def review_word(self):
-        dic = {}
+    # def review_word(self):
+    #     """按顺序和随机复习，但是只显示此单词的英文和中文"""
+    #     dic = {}
+    #     # 随机选出四个词在单词表中的索引
+    #     quiz_words_seq = random.sample(range(self._word_seq), 4)
+    #     # 从四个索引中随机选出一个作为题目和正确答案
+    #     quiz_que_num = random.choice(quiz_words_seq)
+    #     # 保存选出来的索引的选项索引
+    #     quiz_ans_num = quiz_words_seq.index(quiz_que_num)
+    #     # 作为题目
+    #     quiz_eng_word = self._list[quiz_que_num].eng_word
+    #     print("Multiple choice: ", quiz_eng_word)
+    #     # 打印选项
+    #     for i in quiz_words_seq:
+    #         print("{}. {}".format(quiz_words_seq.index(i), self._list[i].chn_word))
+    #     # 公布正确答案
+    #     print("Answer is: ", quiz_ans_num)
+
+    def quiz_chn(self):
+        """随机或者顺序出一个英文单词四个中文，并做记录"""
         # 随机选出四个词在单词表中的索引
         quiz_words_seq = random.sample(range(self._word_seq), 4)
         # 从四个索引中随机选出一个作为题目和正确答案
@@ -89,18 +107,51 @@ class WordList:
         quiz_ans_num = quiz_words_seq.index(quiz_que_num)
         # 作为题目
         quiz_eng_word = self._list[quiz_que_num].eng_word
+        # 学习次数+1
+        self._list[quiz_que_num].lrn_time = self._list[quiz_que_num].lrn_times + 1
+        # 打印单词英文
         print("Multiple choice: ", quiz_eng_word)
-        # 打印选项
+        # 打印中文选项
         for i in quiz_words_seq:
             print("{}. {}".format(quiz_words_seq.index(i), self._list[i].chn_word))
-        # 公布真确答案
+        # 输入选择的正确答案
+        sel_ans = input("Select an answer: ")
+        # 判断选项
+        if sel_ans == quiz_ans_num:
+            print("Correct!")
+        elif sel_ans != quiz_ans_num:
+            self._list[quiz_que_num].err_times = self._list[quiz_que_num].err_times + 1
+            Print("Wrong!")
+        # 公布正确答案
         print("Answer is: ", quiz_ans_num)
 
-    def quiz_chn(self):
-        pass
-
     def quiz_eng(self):
-        pass
+        """随机或者顺序出一个中文四个英文单词，并做记录"""
+        # 随机选出四个词在单词表中的索引
+        quiz_words_seq = random.sample(range(self._word_seq), 4)
+        # 从四个选项中随机选出一个作为题目和正确答案
+        quiz_que_num = random.choice(quiz_words_seq)
+        # 保存从选项中选出来的选项索引
+        quiz_ans_num = quiz_words_seq.index(quiz_que_num)
+        # 作为题目
+        quiz_chn_word = self._list[quiz_que_num].chn_word
+        # 学习次数+1
+        self._list[quiz_que_num].lrn_time = self._list[quiz_que_num].lrn_times + 1
+        # 打印单词中文
+        print("Multiple choice: ", quiz_chn_word)
+        # 打印英文选项
+        for i in quiz_words_seq:
+            print("{}. {}".format(quiz_words_seq.index(i), self._list[i].eng_word))
+        # 输入选择的正确答案
+        sel_ans = input("Select an answer: ")
+        # 判断选项
+        if sel_ans == quiz_ans_num:
+            print("Correct!")
+        elif sel_ans != quiz_ans_num:
+            self._list[quiz_que_num].err_times = self._list[quiz_que_num].err_times + 1
+            Print("Wrong!")
+        # 公布正确答案
+        print("Answer is: ", quiz_ans_num)
 
 
 

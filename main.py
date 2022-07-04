@@ -13,9 +13,11 @@ if __name__ == '__main__':
     for i in range(4):
         in_str = input('Enter a word: ')
         spl_str = in_str.split()
-
-        nl.add_word(spl_str[0], spl_str[1], spl_str[2], spl_str[3])
-        nl.print_list()
+        if spl_str == 4:
+            nl.add_word(spl_str[0], spl_str[1], spl_str[2], spl_str[3])
+            nl.print_list()
+        else:
+            print("Try again.")
 
     flag  = 1
     while int(flag):
